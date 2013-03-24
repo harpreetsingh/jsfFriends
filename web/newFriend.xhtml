@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Add a new friend</title>
+    </h:head>
+    <body>
+        <h1>Add a Friend</h1>
+        <hr/>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Friend Of (enter name): "/>
+            <h:inputText value="#{friendController.friend.name}" required="true">
+                <f:validateLength minimum="1"/>
+            </h:inputText>
+            
+            <h:outputLabel value="Friends name:"/>
+            <h:inputText value="#{friendController.friend.hasFriend}" required="true">
+                <f:validateLength minimum="1"/>
+            </h:inputText>
+        </h:panelGrid>
+        
+        <h:commandButton value="Add a friend" action="#{friendController.addFriend}">
+            <f:ajax execute="@form" render=":friendlist"/>
+        </h:commandButton>
+    </h:form>
+      
+    <h1>List of friends</h1> 
+        <hr/>
+            
+        <h:dataTable id="friendlist" value="#{friendController.friendList}" var="fd" border="1">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Name "/>
+            </f:facet>
+            <h:outputText value="#{fd.name}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Friend's name"/>
+            </f:facet>
+            <h:outputText value="#{fd.hasFriend}"/>
+        </h:column>
+
+    </h:dataTable>
+        <hr/>
+        <i>Sample JSF Application</i>
+            
+    </body>
+</html>
